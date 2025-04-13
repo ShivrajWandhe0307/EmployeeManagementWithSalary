@@ -27,7 +27,7 @@ public class Employee
     @JsonIgnore
     private Department department;
 
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "salary_id")
     @JsonIgnore
     private Salary salary;

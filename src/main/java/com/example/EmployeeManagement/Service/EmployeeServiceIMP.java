@@ -4,6 +4,9 @@ import com.example.EmployeeManagement.Entity.Employee;
 import com.example.EmployeeManagement.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +14,7 @@ import java.util.Optional;
 
 
 @Service
-public class EmployeeServiceIMP implements EmployeeService
-{
+public class EmployeeServiceIMP implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -27,10 +29,19 @@ public class EmployeeServiceIMP implements EmployeeService
         return employeeRepository.findById(id);
     }
 
-    @Override
-    public List<Employee> getALl(int minsal,int maxsal) {
-        return (List<Employee>) employeeRepository.findEmployeesBySalary(minsal,maxsal);
+    public List<Employee> getEmployeesBySalaryRange(int min, int max) {
+        return employeeRepository.findEmployeesBySalaryRange(min, max);
+    }
+
+    public List<Employee> getByDesignation(String designation) {
+        return employeeRepository.findByDesignation(designation);
+    }
+
+    public Page<Employee> getAllEmployees(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return employeeRepository.findAll(pageable);
     }
 
 
 }
+

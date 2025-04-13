@@ -1,6 +1,7 @@
 package com.example.EmployeeManagement.Service;
 
 import com.example.EmployeeManagement.Entity.Employee;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,11 +13,14 @@ public interface EmployeeService
 
   public Optional<Employee> getEmp(int id);
 
-  public List<Employee> getALl(int salary1,int s2);
+  public List<Employee> getEmployeesBySalaryRange(int min, int max);
+
+
+  public List<Employee> getByDesignation(String designation);
 
 
 
-
+  public Page<Employee> getAllEmployees(int page, int size);
 
 
 

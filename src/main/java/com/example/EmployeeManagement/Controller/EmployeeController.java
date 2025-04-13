@@ -3,8 +3,11 @@ package com.example.EmployeeManagement.Controller;
 import com.example.EmployeeManagement.Entity.Department;
 import com.example.EmployeeManagement.Entity.Employee;
 
+
 import com.example.EmployeeManagement.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,11 +35,39 @@ public class EmployeeController
         return e1;
     }
 
-    @GetMapping("/getAll")
-    public List<Employee> getAll(@RequestParam("min") int sal, @RequestParam("max") int salary2){
-        List<Employee> emp=employeeService.getALl(sal,salary2);
-        return  emp;
+    @GetMapping("/salary")
+    public ResponseEntity<?> getEmployeesBySalaryRange(
+            @RequestParam int minSalary,
+            @RequestParam int maxSalary) {
+
+        List<Employee> employees = employeeService.getEmployeesBySalaryRange(minSalary, maxSalary);
+
+        if (employees.isEmpty()) {
+            return ResponseEntity.status(404).body("No employees found within the given salary range.");
+        }
+
+        return ResponseEntity.ok(employees);
     }
+
+    @GetMapping("/{designation}")
+    public ResponseEntity<?> getByDesignation(@PathVariable String designation) {
+        var list = employeeService.getByDesignation(designation);
+        return list.isEmpty()
+                ? ResponseEntity.status(404).body("No employees with this designation")
+                : ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<Employee>> getEmployeesWithPagination(
+            @RequestParam int page,
+            @RequestParam int size) {
+
+        return ResponseEntity.ok(employeeService.getAllEmployees(page, size));
+    }
+
+
+
+
 
 
 

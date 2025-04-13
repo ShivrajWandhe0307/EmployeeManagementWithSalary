@@ -2,6 +2,8 @@ package com.example.EmployeeManagement.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table
 public class Salary
@@ -13,8 +15,8 @@ public class Salary
     @Column
     private int salary;
 
-    @OneToOne(mappedBy = "salary")
-    private Employee employee;
+    @OneToMany(mappedBy = "salary")
+    private List<Employee> employee;
 
     public int getId() {
         return id;
@@ -32,15 +34,15 @@ public class Salary
         this.salary = salary;
     }
 
-    public Employee getEmployee() {
+    public List<Employee> getEmployees() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployees(List<Employee> employees) {
+        this.employee = employees;
     }
 
-    public Salary(int id, int salary, Employee employee) {
+    public Salary(int id, int salary, List<Employee> employee) {
         this.id = id;
         this.salary = salary;
         this.employee = employee;
