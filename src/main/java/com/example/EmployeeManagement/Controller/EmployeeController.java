@@ -51,7 +51,7 @@ public class EmployeeController
 
     @GetMapping("/{designation}")
     public ResponseEntity<?> getByDesignation(@PathVariable String designation) {
-        var list = employeeService.getByDesignation(designation);
+        List<Employee> list = employeeService.getByDesignation(designation);  // Explicit type
         return list.isEmpty()
                 ? ResponseEntity.status(404).body("No employees with this designation")
                 : ResponseEntity.ok(list);
@@ -64,12 +64,6 @@ public class EmployeeController
 
         return ResponseEntity.ok(employeeService.getAllEmployees(page, size));
     }
-
-
-
-
-
-
 
 
 
