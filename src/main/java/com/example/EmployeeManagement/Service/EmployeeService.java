@@ -11,7 +11,7 @@ public interface EmployeeService
 {
   public void addEmployee(Employee employee);
 
-  public Optional<Employee> getEmp(int id);
+  public Optional<Employee> getEmpByDepartmentId(int departmentId);
 
   public List<Employee> getEmployeesBySalaryRange(int min, int max);
 

@@ -28,12 +28,14 @@ public class EmployeeController
     }
 
 
-    @GetMapping("/get")
-    public Optional<Employee> getEmp(@RequestBody Department department)
-    {
-        Optional<Employee> e1=employeeService.getEmp(department.getId());;
-        return e1;
+    @GetMapping("/get/{departmentId}")
+    public ResponseEntity<?> getEmpByDepartment(@PathVariable int departmentId) {
+        return employeeService.getEmpByDepartmentId(departmentId)
+                .<ResponseEntity<?>>map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(404).body("No employee found for department ID"));
     }
+
+
 
     @GetMapping("/salary")
     public ResponseEntity<?> getEmployeesBySalaryRange(

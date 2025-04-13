@@ -24,10 +24,10 @@ public class EmployeeServiceIMP implements EmployeeService {
         employeeRepository.save(employee);
     }
 
-    @Override
-    public Optional<Employee> getEmp(int id) {
-        return employeeRepository.findById(id);
+    public Optional<Employee> getEmpByDepartmentId(int departmentId) {
+        return employeeRepository.findByDepartmentId(departmentId);
     }
+
 
     public List<Employee> getEmployeesBySalaryRange(int min, int max) {
         return employeeRepository.findEmployeesBySalaryRange(min, max);
