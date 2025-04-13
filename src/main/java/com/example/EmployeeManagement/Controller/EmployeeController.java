@@ -53,7 +53,7 @@ public class EmployeeController
 
     @GetMapping("/{designation}")
     public ResponseEntity<?> getByDesignation(@PathVariable String designation) {
-        List<Employee> list = employeeService.getByDesignation(designation);  // Explicit type
+        List<Employee> list = employeeService.getByDesignation(designation);  
         return list.isEmpty()
                 ? ResponseEntity.status(404).body("No employees with this designation")
                 : ResponseEntity.ok(list);
