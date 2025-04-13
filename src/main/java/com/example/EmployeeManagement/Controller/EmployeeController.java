@@ -1,6 +1,6 @@
 package com.example.EmployeeManagement.Controller;
 
-import com.example.EmployeeManagement.Entity.Department;
+
 import com.example.EmployeeManagement.Entity.Employee;
 
 
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/Employee")
@@ -53,7 +53,7 @@ public class EmployeeController
 
     @GetMapping("/{designation}")
     public ResponseEntity<?> getByDesignation(@PathVariable String designation) {
-        List<Employee> list = employeeService.getByDesignation(designation);  // Explicit type
+        List<Employee> list = employeeService.getByDesignation(designation);
         return list.isEmpty()
                 ? ResponseEntity.status(404).body("No employees with this designation")
                 : ResponseEntity.ok(list);
